@@ -1,0 +1,23 @@
+Terminal 1: Ligar a Infraestrutura (DB + Storage)
+
+Onde: Na pasta raiz music-mvp
+
+Comando: docker-compose up -d
+
+Por quê: Isso inicia seu contêiner do PostgreSQL e do MinIO em segundo plano (-d). Sem isso, seu backend não terá onde salvar os metadados nem onde guardar os arquivos de música.
+
+Terminal 2: Ligar o Backend (API)
+
+Onde: Na pasta music-mvp/backend
+
+Comando: npm run dev
+
+Por quê: Isso inicia seu servidor Node.js/Express. Sem ele, seu frontend não tem como buscar a lista de músicas, fazer upload ou pedir a URL de streaming.
+
+Terminal 3: Ligar o Frontend (O Site)
+
+Onde: Na pasta music-mvp/frontend
+
+Comando: npm run dev
+
+Por quê: Isso inicia o servidor Vite que "serve" seu aplicativo React para o navegador. É o que permite que você acesse o http://localhost:5173.
