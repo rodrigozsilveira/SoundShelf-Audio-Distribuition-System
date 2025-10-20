@@ -1,23 +1,20 @@
 Terminal 1: Ligar a Infraestrutura (DB + Storage)
-
-Onde: Na pasta raiz music-mvp
-
-Comando: docker-compose up -d
-
-Por quê: Isso inicia seu contêiner do PostgreSQL e do MinIO em segundo plano (-d). Sem isso, seu backend não terá onde salvar os metadados nem onde guardar os arquivos de música.
+soundshelf-audio-distribuition-system > docker-compose up -d
 
 Terminal 2: Ligar o Backend (API)
+/backend > npm run dev
 
-Onde: Na pasta music-mvp/backend
+Terminal 3: Ligar o Frontkend (API)
+/frontend > npm run dev
 
-Comando: npm run dev
+desligar
+Terminal 2: 
+/backend > ctrl + c
 
-Por quê: Isso inicia seu servidor Node.js/Express. Sem ele, seu frontend não tem como buscar a lista de músicas, fazer upload ou pedir a URL de streaming.
+Terminal 3: 
+/frontend > ctrl + c
 
-Terminal 3: Ligar o Frontend (O Site)
+Terminal 1:
+soundshelf-audio-distribuition-system > docker-compose down
 
-Onde: Na pasta music-mvp/frontend
-
-Comando: npm run dev
-
-Por quê: Isso inicia o servidor Vite que "serve" seu aplicativo React para o navegador. É o que permite que você acesse o http://localhost:5173.
+http://localhost:5173
