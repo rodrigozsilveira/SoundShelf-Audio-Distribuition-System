@@ -18,3 +18,119 @@ Terminal 1:
 soundshelf-audio-distribuition-system > docker-compose down
 
 http://localhost:5173
+
+📦 projeto-musica/
+│
+├── 📁 backend/                     # Servidor (API + Banco + Storage + Autenticação)
+│   ├── package.json
+│   ├── src/
+│   │   ├── app.js
+│   │   ├── server.js
+│   │   │
+│   │   ├── config/
+│   │   │   ├── db.js
+│   │   │   ├── s3.js
+│   │   │   ├── redis.js            # Cache e fila de mensagens (pub/sub)
+│   │   │   └── env.js              # Variáveis de ambiente centralizadas
+│   │   │
+│   │   ├── middlewares/
+│   │   │   ├── authMiddleware.js
+│   │   │   ├── errorHandler.js
+│   │   │   └── rateLimiter.js
+│   │   │
+│   │   ├── routes/
+│   │   │   ├── authRoutes.js
+│   │   │   ├── trackRoutes.js
+│   │   │   ├── uploadRoutes.js
+│   │   │   └── playlistRoutes.js
+│   │   │
+│   │   ├── controllers/
+│   │   │   ├── authController.js
+│   │   │   ├── trackController.js
+│   │   │   ├── uploadController.js
+│   │   │   └── playlistController.js
+│   │   │
+│   │   ├── services/
+│   │   │   ├── trackService.js     # Lógica de negócio separada do controller
+│   │   │   ├── playlistService.js
+│   │   │   ├── mailService.js      # Serviço de envio de email (ex: SMTP ou SES)
+│   │   │   └── cacheService.js     # Redis, memória, etc.
+│   │   │
+│   │   ├── models/
+│   │   │   ├── userModel.js        # ORM ou consultas SQL isoladas
+│   │   │   ├── trackModel.js
+│   │   │   ├── albumModel.js
+│   │   │   └── playlistModel.js
+│   │   │
+│   │   ├── utils/
+│   │   │   ├── generateToken.js
+│   │   │   ├── logger.js
+│   │   │   └── helpers.js
+│   │   │
+│   │   └── workers/
+│   │       ├── queueWorker.js      # Processamento assíncrono (fila de uploads, e-mails, etc.)
+│   │       └── eventBus.js         # Comunicação entre microserviços (RabbitMQ, Kafka, etc.)
+│   │
+│   └── tests/
+│       ├── integration/
+│       └── unit/
+│
+│
+├── 📁 frontend/                    # Cliente Web (SPA)
+│   ├── package.json
+│   ├── vite.config.js
+│   ├── public/
+│   └── src/
+│       ├── main.jsx
+│       ├── App.jsx
+│       ├── api/
+│       │   ├── apiClient.js        # Axios + interceptors
+│       │   ├── authService.js
+│       │   ├── trackService.js
+│       │   └── playlistService.js
+│       │
+│       ├── components/
+│       │   ├── Player/
+│       │   ├── Playlist/
+│       │   ├── Auth/
+│       │   └── Layout/
+│       │
+│       ├── pages/
+│       │   ├── Home.jsx
+│       │   ├── Login.jsx
+│       │   ├── Register.jsx
+│       │   ├── Library.jsx
+│       │   └── Upload.jsx
+│       │
+│       ├── contexts/
+│       │   └── AuthContext.jsx     # Context API p/ login global
+│       │
+│       ├── hooks/
+│       │   ├── useAuth.js
+│       │   └── usePlayer.js
+│       │
+│       ├── styles/
+│       │   ├── index.css
+│       │   └── theme.js
+│       │
+│       └── utils/
+│           └── formatTime.js
+│
+│
+├── 📁 shared/                      # Código comum entre cliente e servidor (ex: DTOs, validações)
+│   ├── constants.js
+│   ├── validators/
+│   │   ├── userValidator.js
+│   │   └── playlistValidator.js
+│   └── types/
+│       └── apiResponses.js
+│
+│
+├── 📁 deploy/
+│   ├── docker-compose.yml          # Banco, Redis, MinIO, API, Front
+│   ├── Dockerfile.backend
+│   ├── Dockerfile.frontend
+│   ├── nginx.conf                  # Reverse proxy
+│   └── k8s/                        # Manifestos Kubernetes (opcional)
+│
+└── .env                            # Variáveis compartilhadas (.env.example também)
